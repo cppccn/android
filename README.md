@@ -1,2 +1,3 @@
-# owndrive-android
-Android Client for Owndrive
+# cappuccino-android
+
+Android Client for Cappuccino
