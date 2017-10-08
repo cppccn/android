@@ -2,15 +2,16 @@ package mprimavera.androidmove.file_view.view;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import java.util.ArrayList;
-import java.util.List;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import mprimavera.androidmove.R;
-import mprimavera.androidmove.file_view.model.FileModel;
+import mprimavera.rxfile.RxFile;
 
 public class FileView extends Fragment {
     private LinearLayout mView;
@@ -23,14 +24,15 @@ public class FileView extends Fragment {
 
         ListView fileListView = mView.findViewById(R.id.listView);
 
-        List<FileModel> files = new ArrayList<>();
+        RxFile.listInternal(null)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnError(error -> {})
+            .subscribe(fileModels -> {
+                FileViewAdapter fileViewAdapter = new FileViewAdapter(getContext(), R.layout.file_view_item_row, fileModels);
+                fileListView.setAdapter(fileViewAdapter);
+            });
 
-        for(int i = 0; i < 10; i++) {
-            files.add(new FileModel("Test file -- 200 Mb"));
-        }
-
-        FileViewAdapter fileViewAdapter = new FileViewAdapter(getContext(), R.layout.file_view_item_row, files);
-        fileListView.setAdapter(fileViewAdapter);
         return mView;
     }
 }

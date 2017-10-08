@@ -1,4 +1,4 @@
-package mprimavera.androidmove.file_view.model;
+package mprimavera.rxfile.model;
 
 public class FileModel {
     private String name;
@@ -9,7 +9,7 @@ public class FileModel {
         this.name = name;
     }
 
-    public void setString(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 

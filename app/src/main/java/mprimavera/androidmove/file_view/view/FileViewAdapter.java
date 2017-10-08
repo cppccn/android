@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import mprimavera.androidmove.R;
-import mprimavera.androidmove.file_view.model.FileModel;
+import mprimavera.rxfile.model.FileModel;
 
 public class FileViewAdapter extends ArrayAdapter<FileModel> {
     public FileViewAdapter(Context context, int textViewResourceId) {
