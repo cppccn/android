@@ -41,6 +41,7 @@ public class RxFile {
                     }
 
                     model.setPath(file.getAbsolutePath());
+                    model.setFile(file);
 
                     result.add(model);
                 }
@@ -51,6 +52,10 @@ public class RxFile {
                 emitter.onError(e);
             }
         });
+    }
+
+    public static Observable<List<FileModel>> listFiles(File directory) {
+        return listDirectory(directory);
     }
 
     public static Observable<List<FileModel>> listInternal(String path) {

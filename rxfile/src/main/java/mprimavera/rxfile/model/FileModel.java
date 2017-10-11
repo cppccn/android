@@ -1,10 +1,13 @@
 package mprimavera.rxfile.model;
 
+import java.io.File;
+
 public class FileModel {
     private String name;
     private boolean isDirectory;
     private double size;
     private String path;
+    private File file;
 
     public FileModel() {}
 
@@ -37,4 +40,7 @@ public class FileModel {
 
     public void setSize(double size) { this.size = size; }
     public double getSize() { return this.size; }
+
+    public File getFile() { return this.file; }
+    public void setFile(File file) { this.file = file; }
 }

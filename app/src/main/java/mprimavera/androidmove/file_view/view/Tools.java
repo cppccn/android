@@ -1,5 +1,6 @@
 package mprimavera.androidmove.file_view.view;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

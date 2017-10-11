@@ -13,7 +13,7 @@ import mprimavera.androidmove.R;
 import mprimavera.rxfile.model.FileModel;
 
 public class FileViewAdapter extends ArrayAdapter<FileModel> {
-    public static interface OnFileClicked {
+    public interface OnFileClicked {
         void clickedOn(FileModel file);
     }
 
