@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -37,6 +38,11 @@ public class FileViewAdapter extends ArrayAdapter<FileModel> {
         if (file != null) {
             TextView fileName = v.findViewById(R.id.fileName);
             fileName.setText(file.getName());
+
+            ImageView icon = v.findViewById(R.id.icon);
+            if(file.isDirectory()) {
+                icon.setImageResource(R.drawable.ic_folder_black_24px);
+            } else icon.setImageResource(R.drawable.ic_insert_drive_file_black_24px);
         }
 
         return v;

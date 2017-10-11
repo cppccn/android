@@ -1,8 +1,6 @@
 package mprimavera.rxfile;
 
 import android.os.Environment;
-import android.util.Log;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +27,7 @@ public class RxFile {
                 for(int i = 0; i < files.length; i++) {
                     FileModel model = new FileModel();
                     model.setName(files[i].getName());
+                    model.setIsDirectory(files[i].isDirectory());
                     result.add(model);
                 }
 
