@@ -15,25 +15,27 @@ import mprimavera.rxfile.RxFile;
 
 public class FileView extends Fragment {
     private LinearLayout mView;
+    private ListView mFileListView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mView = (LinearLayout) inflater.inflate(R.layout.frag_file_view, container, false);
 
-        ListView fileListView = mView.findViewById(R.id.listView);
+        mFileListView = mView.findViewById(R.id.listView);
+        this.listFiles();
+        return mView;
+    }
 
+    public void listFiles() {
         RxFile.listInternal(null)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnError(error -> {
-            })
+            .doOnError(error -> {})
             .flatMap(fileModels -> Observable.just(Tools.orderFileModels(fileModels)))
             .subscribe(fileModels -> {
                 FileViewAdapter fileViewAdapter = new FileViewAdapter(getContext(), R.layout.file_view_item_row, fileModels);
-                fileListView.setAdapter(fileViewAdapter);
+                mFileListView.setAdapter(fileViewAdapter);
             });
-
-        return mView;
     }
 }
