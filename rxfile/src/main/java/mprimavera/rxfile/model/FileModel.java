@@ -4,6 +4,7 @@ public class FileModel {
     private String name;
     private boolean isDirectory;
     private double size;
+    private String path;
 
     public FileModel() {}
 
@@ -30,6 +31,9 @@ public class FileModel {
     public void setIsDirectory(boolean isDirectory) {
         this.isDirectory = isDirectory;
     }
+
+    public void setPath(String path) { this.path = path; }
+    public String getPath() { return this.path; }
 
     public void setSize(double size) { this.size = size; }
     public double getSize() { return this.size; }

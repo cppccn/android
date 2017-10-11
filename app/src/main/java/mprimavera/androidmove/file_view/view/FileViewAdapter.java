@@ -6,18 +6,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import java.util.List;
 import mprimavera.androidmove.R;
 import mprimavera.rxfile.model.FileModel;
 
 public class FileViewAdapter extends ArrayAdapter<FileModel> {
+    public static interface OnFileClicked {
+        void clickedOn(FileModel file);
+    }
+
+    private OnFileClicked onFileClicked;
+
     public FileViewAdapter(Context context, int textViewResourceId) {
         super(context, textViewResourceId);
     }
 
     public FileViewAdapter(Context context, int resource, List<FileModel> items) {
         super(context, resource, items);
+    }
+
+    public void setClickListener(OnFileClicked onFileClicked) {
+        this.onFileClicked = onFileClicked;
     }
 
     @Override
@@ -34,6 +45,12 @@ public class FileViewAdapter extends ArrayAdapter<FileModel> {
         FileModel file = getItem(position);
 
         if (file != null) {
+            LinearLayout mainLayout = v.findViewById(R.id.mainLayout);
+
+            mainLayout.setOnClickListener(view -> {
+                onFileClicked.clickedOn(file);
+            });
+
             TextView fileName = v.findViewById(R.id.fileName);
             fileName.setText(file.getName());
 

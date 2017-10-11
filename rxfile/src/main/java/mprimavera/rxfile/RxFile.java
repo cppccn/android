@@ -1,6 +1,8 @@
 package mprimavera.rxfile;
 
 import android.os.Environment;
+import android.util.Log;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +14,7 @@ public class RxFile {
     public static Observable<List<FileModel>> listDirectory(File directory) {
         return Observable.create(emitter -> {
             try {
+                Log.d("TEST", "Trying to browse : " + directory.getAbsolutePath());
                 if(!directory.isDirectory()) {
                     emitter.onError(new NotDirectoryException());
                 }
@@ -37,6 +40,8 @@ public class RxFile {
                         model.setSize(size);
                     }
 
+                    model.setPath(file.getAbsolutePath());
+
                     result.add(model);
                 }
 
@@ -54,12 +59,11 @@ public class RxFile {
         if(path == null) {
             return listDirectory(rootDirectory);
         } else {
-            String directoryPath = rootDirectory.getAbsolutePath();
             if(!path.startsWith("/")) {
                 path = "/" + path;
             }
 
-            File dir = new File(directoryPath + path);
+            File dir = new File(path);
             return listDirectory(dir);
         }
     }

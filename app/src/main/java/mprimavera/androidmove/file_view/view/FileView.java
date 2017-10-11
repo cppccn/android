@@ -23,18 +23,19 @@ public class FileView extends Fragment {
         mView = (LinearLayout) inflater.inflate(R.layout.frag_file_view, container, false);
 
         mFileListView = mView.findViewById(R.id.listView);
-        this.listFiles();
+        this.listFiles(null);
         return mView;
     }
 
-    public void listFiles() {
-        RxFile.listInternal(null)
+    public void listFiles(String path) {
+        RxFile.listInternal(path)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnError(error -> {})
             .flatMap(fileModels -> Observable.just(Tools.orderFileModels(fileModels)))
             .subscribe(fileModels -> {
                 FileViewAdapter fileViewAdapter = new FileViewAdapter(getContext(), R.layout.file_view_item_row, fileModels);
+                fileViewAdapter.setClickListener(file -> listFiles(file.getPath()));
                 mFileListView.setAdapter(fileViewAdapter);
             });
     }
