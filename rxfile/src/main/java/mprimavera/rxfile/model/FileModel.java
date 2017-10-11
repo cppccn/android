@@ -3,6 +3,7 @@ package mprimavera.rxfile.model;
 public class FileModel {
     private String name;
     private boolean isDirectory;
+    private double size;
 
     public FileModel() {}
 
@@ -29,4 +30,7 @@ public class FileModel {
     public void setIsDirectory(boolean isDirectory) {
         this.isDirectory = isDirectory;
     }
+
+    public void setSize(double size) { this.size = size; }
+    public double getSize() { return this.size; }
 }

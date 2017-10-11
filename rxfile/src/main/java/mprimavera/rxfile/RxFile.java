@@ -25,9 +25,18 @@ public class RxFile {
 
                 List<FileModel> result = new ArrayList<>();
                 for(int i = 0; i < files.length; i++) {
+                    File file = files[i];
                     FileModel model = new FileModel();
-                    model.setName(files[i].getName());
-                    model.setIsDirectory(files[i].isDirectory());
+                    model.setName(file.getName());
+
+                    boolean isDirectory = file.isDirectory();
+                    model.setIsDirectory(isDirectory);
+
+                    if(!isDirectory) {
+                        double size = file.length() / 1024.0;
+                        model.setSize(size);
+                    }
+
                     result.add(model);
                 }
 

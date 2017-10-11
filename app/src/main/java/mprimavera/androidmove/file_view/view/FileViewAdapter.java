@@ -7,9 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import java.util.List;
-
 import mprimavera.androidmove.R;
 import mprimavera.rxfile.model.FileModel;
 
@@ -43,6 +41,18 @@ public class FileViewAdapter extends ArrayAdapter<FileModel> {
             if(file.isDirectory()) {
                 icon.setImageResource(R.drawable.ic_folder_black_24px);
             } else icon.setImageResource(R.drawable.ic_insert_drive_file_black_24px);
+
+            TextView sizeView = v.findViewById(R.id.size);
+            double size = file.getSize();
+            String sizeText;
+            if(size >= 1024.0) {
+                size /= 1024.0;
+                sizeText = String.format("%.2f Mb", size);
+            } else {
+                sizeText = String.format("%.2f Kb", size);
+            }
+
+            sizeView.setText(sizeText);
         }
 
         return v;
